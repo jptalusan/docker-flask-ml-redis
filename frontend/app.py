@@ -9,7 +9,8 @@ import json
 import redis
 from rq import Queue, Connection
 from classify_array import classify
- 
+from rq.job import Job
+
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'csv', 'jpg'])
 
@@ -32,7 +33,18 @@ def long_request():
         task = q.enqueue(classify)
             
     print(task.get_id())
-    return jsonify(task.get_id()), 202
+
+    return jsonify(id=task.get_id()), 202
+
+@app.route("/results/<job_key>", methods=['GET'])
+def get_results(job_key):
+
+    job = Job.fetch(job_key, connection=conn)
+
+    if job.is_finished:
+        return str(job.result), 200
+    else:
+        return "Nay!", 202
 
 @app.route('/test_request')
 def test_request():
