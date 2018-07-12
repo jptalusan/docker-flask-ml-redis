@@ -8,16 +8,11 @@ import os
 import redis
 from rq import Worker, Queue, Connection
 from flask.cli import FlaskGroup
-from start_work import runworker
 
 HOST = '0.0.0.0'
 PORT = 8081
 
 app = Flask(__name__)
-
-listen = ['default']
-redis_url = os.getenv('REDISTOGO_URL', 'redis://redis:6379')
-conn = redis.from_url(redis_url)
 
 cache = redis.Redis(host='redis', port=6379)
 

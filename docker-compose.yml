@@ -19,7 +19,6 @@ services:
 
   backend:
     image: raspberrypi3-05:5000/backend
-    #image: backend
     build:
       context: ./backend
       dockerfile: Dockerfile
