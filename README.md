@@ -16,6 +16,18 @@ Querying the catalog of the local registry should return:
 curl raspberrypi3-05:5000/v2/_catalog  
 {"repositories":["backend","backend-demo","dashboard","flask-app","frontend","python","redis"]}  
 
+Needs the following directories/files on the worker nodes as volumes:  
+place at ~ or /home/pi:  
+
+flask-demo-registry/  
+`-- backend  
+    |-- app.py  
+    |-- classify_array.py  
+    |-- Dockerfile  
+    |-- model.pkl  
+    |-- README.md  
+    |-- requirements.txt  
+    `-- Simple\ Iris\ Model.ipynb  
 
 Commands:  
 docker-compose up  
